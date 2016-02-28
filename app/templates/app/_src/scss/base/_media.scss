@@ -1,0 +1,25 @@
+// ==========================================================================
+// Media Elements
+// ==========================================================================
+
+audio,
+canvas,
+video {
+    display: inline-block;
+}
+
+// Video Helpers
+video{
+    max-width:100%;
+    color: transparent;
+	font-size: 0;
+	vertical-align: middle;
+    border:0;
+	-ms-interpolation-mode: bicubic;
+}
+
+// Video Responsive
+video.responsive-video {
+  max-width: 100%;
+  height: auto;
+}

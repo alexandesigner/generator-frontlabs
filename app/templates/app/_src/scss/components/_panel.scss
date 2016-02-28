@@ -1,0 +1,85 @@
+// ==========================================================================
+// Panels
+// ==========================================================================
+.panel {
+  border:1px solid $light-color;background:#fff;
+
+  @include border-radius($base-radius);
+
+  .panel-header, .panel-footer {
+    position:relative;
+    padding:0 10px;
+    background:$ui-color;
+    height:42px;line-height:42px;
+  }
+  .panel-icon-left {
+    .panel-title {
+      float:left;margin-left:52px;
+    }
+  }
+  .panel-header {
+    border-bottom:1px solid $light-color;width:100%;margin:0;
+
+    @include border-radius-separate($base-radius, $base-radius, 0, 0);
+
+    img {
+      @include border-radius-separate($base-radius, $base-radius, 0, 0);
+    }
+
+    .button {
+      height:42px;line-height:42px;float:left;
+      @include border-radius(0);
+
+      &:hover {
+        background:rgba(0,0,0,0.05);
+      }
+    }
+
+    .panel-header-right, .panel-header-left {
+      position:absolute;top:0;height:42px;line-height:42px;
+    }
+
+    .panel-header-right {
+      right:0;
+      .button {
+        &:last-child {
+          @include border-radius-separate(0, $base-radius, 0, 0);
+        }
+      }
+    }
+    .panel-header-left {
+      left:0;
+      .button {
+        &:first-child {
+          @include border-radius-separate($base-radius, 0, 0, 0);
+        }
+      }
+    }
+
+  }
+  .panel-footer {
+    border-top:1px solid $light-color;
+
+    @include border-radius-separate(0, 0, $base-radius, $base-radius);
+  }
+  .panel-title {
+    font-weight:500;
+    line-height:42px;
+    @include font-size(22px);
+  }
+  .panel-content {
+    padding:15px 10px;
+  }
+}
+
+
+// Placeholder
+.placeholder {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px dashed $light-color;
+  background: $ui-color;
+  color: #666;
+  @include border-radius($base-radius);
+}
+

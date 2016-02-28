@@ -1,0 +1,311 @@
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+// Background Image
+$image-path: '../images' !default;
+$fallback-extension: 'png' !default;
+$retina-suffix: '@2x';
+
+@mixin background-image($name, $size:false){
+    background-image: url(#{$image-path}/#{$name}.svg);
+    @if($size){
+        background-size: $size;
+    }
+    .no-svg &{
+        background-image: url(#{$image-path}/#{$name}.#{$fallback-extension});
+
+        @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+          background-image: url(#{$image-path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
+        }
+    }
+}
+
+// Configure vendor
+@mixin vendor($property, $value) {
+  -webkit-#{$property}: #{$value};
+   -khtml-#{$property}: #{$value};
+     -moz-#{$property}: #{$value};
+      -ms-#{$property}: #{$value};
+       -o-#{$property}: #{$value};
+          #{$property}: #{$value};
+}
+
+// Line height font
+@function calculateRem($size) {
+  $remSize: $size / $base-font-size;
+  @return $remSize * 1rem;
+}
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+// Clearfix
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// Text Nowrap
+@mixin text-nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+// Font Smoothing
+@mixin font-smoothing($value: antialiased) {
+  @if $value == antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+// Transition
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+// Background Gradient
+@mixin background-gradient($startColor: #3C3C3C, $endColor: #999999) {
+    background-color: $startColor;
+    background-image: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor));
+    background-image: -webkit-linear-gradient(top, $startColor, $endColor);
+    background-image:    -moz-linear-gradient(top, $startColor, $endColor);
+    background-image:     -ms-linear-gradient(top, $startColor, $endColor);
+    background-image:      -o-linear-gradient(top, $startColor, $endColor);
+    background-image:         linear-gradient(top, $startColor, $endColor);
+    filter:            progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}');
+}
+
+// Background Horizontal
+@mixin background-horizontal($startColor: #3C3C3C, $endColor: #999999) {
+    background-color: $startColor;
+    background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor));
+    background-image: -webkit-linear-gradient(left, $startColor, $endColor);
+    background-image:    -moz-linear-gradient(left, $startColor, $endColor);
+    background-image:     -ms-linear-gradient(left, $startColor, $endColor);
+    background-image:      -o-linear-gradient(left, $startColor, $endColor);
+    background-image:         linear-gradient(left, $startColor, $endColor);
+    filter:            progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}', gradientType='1');
+}
+
+// Background Radial
+@mixin background-radial($startColor: #FFFFFF, $startPos: 0%, $endColor: #000000, $endPos:100%) {
+    background: -moz-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop($startPos,$startColor), color-stop($endPos,$endColor));
+    background: -webkit-radial-gradient(center, ellipse cover, $startColor $startPos,$endColor $endPos);
+    background: -o-radial-gradient(center, ellipse cover, $startColor $startPos,$endColor $endPos);
+    background: -ms-radial-gradient(center, ellipse cover, $startColor $startPos,$endColor $endPos);
+    background: radial-gradient(ellipse at center, $startColor $startPos,$endColor $endPos);
+}
+
+// Background Size
+@mixin background-size($width: 100%, $height: $width) {
+  @if type-of($width) == 'number' and $height != null {
+    @include vendor('background-size', $width $height);
+  } @else {
+    @include vendor('background-size', $width);
+  }
+}
+
+// Background Color Opacity
+@mixin background-opacity($color: #000, $opacity: 0.85) {
+  background: $color;
+  background: rgba($color, $opacity);
+}
+
+// Border Radius
+@mixin border-radius($radius: 5px) {
+    @include vendor('border-radius', $radius);
+}
+
+// Border Radius Separate
+@mixin border-radius-separate($topLeftRadius: 5px, $topRightRadius: 5px, $bottomLeftRadius: 5px, $bottomRightRadius: 5px) {
+  -webkit-border-top-left-radius:     $topLeftRadius;
+  -webkit-border-top-right-radius:    $topRightRadius;
+  -webkit-border-bottom-right-radius: $bottomRightRadius;
+  -webkit-border-bottom-left-radius:  $bottomLeftRadius;
+
+  -moz-border-radius-topleft:     $topLeftRadius;
+  -moz-border-radius-topright:    $topRightRadius;
+  -moz-border-radius-bottomright: $bottomRightRadius;
+  -moz-border-radius-bottomleft:  $bottomLeftRadius;
+
+  border-top-left-radius:     $topLeftRadius;
+  border-top-right-radius:    $topRightRadius;
+  border-bottom-right-radius: $bottomRightRadius;
+  border-bottom-left-radius:  $bottomLeftRadius;
+}
+
+// Box
+@mixin box($orient: horizontal, $pack: center, $align: center) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+
+  @include vendor('box-orient', $orient);
+  @include vendor('box-pack', $pack);
+  @include vendor('box-align', $align);
+}
+
+// Box Rgba
+@mixin box-rgba($r: 60, $g: 3, $b: 12, $opacity: 0.23, $color: #3C3C3C) {
+  background-color: transparent;
+  background-color: rgba($r, $g, $b, $opacity);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$color}',endColorstr='#{$color}');
+            zoom:   1;
+}
+
+// Box Shadow
+@mixin box-shadow($top, $left, $blur, $spread, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $spread $color;
+    -moz-box-shadow:inset $top $left $blur $spread $color;
+    box-shadow:inset $top $left $blur $spread $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $spread $color;
+    -moz-box-shadow: $top $left $blur $spread $color;
+    box-shadow: $top $left $blur $spread $color;
+  }
+}
+
+// Box Sizing
+@mixin box-sizing($type: border-box) {
+  @include vendor('box-sizing', $type);
+}
+
+// Columns
+@mixin columns($count: 3, $gap: 10) {
+  @include vendor('column-count', $count);
+  @include vendor('column-gap', $gap);
+}
+
+// Flex
+@mixin flex($value: 1) {
+  @include vendor('box-flex', $value);
+}
+
+// Flip
+@mixin flip($scaleX: -1) {
+  @include vendor('transform', scaleX($scaleX));
+  filter:            FlipH;
+  -ms-filter:        "FlipH";
+}
+
+// Font Face
+@mixin font-face($fontFamily: myFont, $eotFileSrc: 'myFont.eot', $woffFileSrc: 'myFont.woff', $ttfFileSrc: 'myFont.ttf', $svgFileSrc: 'myFont.svg', $svgFontID: '#myFont') {
+  font-family: $fontFamily;
+  src: url($eotFileSrc)  format('eot'),
+       url($woffFileSrc) format('woff'),
+       url($ttfFileSrc)  format('truetype'),
+       url($svgFileSrc + $svgFontID) format('svg');
+}
+
+// Opacity
+@mixin opacity($opacity: 0.5) {
+    $opacityMultiplied: ($opacity * 100);
+    filter:         alpha(opacity=$opacityMultiplied);
+    -ms-filter:     "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $opacityMultiplied + ")";
+    @include vendor('opacity', $opacity);
+}
+
+
+// Resize
+@mixin resize($direction: both) {
+  @include vendor('resize', $direction);
+}
+
+// Rotate
+@mixin rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0) {
+  @include vendor('transform', rotate($deg + deg));
+  filter: progid:DXImageTransform.Microsoft.Matrix(
+       M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, sizingMethod='auto expand');
+    zoom: 1;
+}
+
+// Text Shadow
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+    text-shadow: $x $y $blur $color;
+}
+
+// Transform
+@mixin transform($params) {
+  @include vendor('transform', $params);
+}
+
+// Keyframes
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+//
+// Breakpoints Responsive
+// ==========================================================================
+
+// Desktop Wide (HD)
+@mixin desktop-wide { // > 1280px
+  @media only screen and (min-width: 1280px) {
+    @content;
+  }
+}
+// Desktop (PC's)
+@mixin desktop { // 940px / 1280px
+  @media (min-width: 940px ) and (max-width: 1279px) {
+    @content;
+  }
+}
+// Tablet
+@mixin tablet { // < 940px
+  @media (min-width: 768px ) and (max-width: 939px ) {
+    @content;
+  }
+}
+// Mobile Wide ( Landscape )
+@mixin mobile-wide { // < 768px
+  @media (min-width: 520px ) and (max-width: 767px ) {
+    @content;
+  }
+}
+// Mobile Wide ( Portrait )
+@mixin mobile { // < 520px
+  @media (min-width: 320px ) and (max-width: 519px ) {
+    @content;
+  }
+}
+
+@mixin no-screen { // < 320px
+  @media (min-width: 0 ) and (max-width: 319px ) {
+    @content;
+  }
+}

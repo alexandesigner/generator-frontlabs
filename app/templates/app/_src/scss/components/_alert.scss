@@ -1,0 +1,35 @@
+// ==========================================================================
+// Alert
+// ==========================================================================
+.alert {
+  position:relative;border:1px solid color($yellow, 200);padding:12px;background:color($yellow, 50);margin-bottom:15px;
+  padding-right:32px;
+
+  color:color($orange, 400);
+  @include border-radius($base-radius);
+
+  .close {
+    position:absolute;right:-8px;top:3px;
+    color:color($dark, 100);
+  }
+
+}
+
+.alert-rounded {
+  @include border-radius($base-rounded-radius);
+  .close {
+    right:-8px;top:6px;
+  }
+}
+
+.alert-info {
+  background:color($blue, 50);
+  color:color($blue, 500);
+  border:1px solid color($blue, 100);;
+}
+
+.alert-error {
+  background:color($red, 50);
+  color:color($red, 500);
+  border:1px solid color($red, 100);;
+}

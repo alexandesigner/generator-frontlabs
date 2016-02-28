@@ -1,0 +1,27 @@
+///////////////////////////
+// DESKTOP
+//////////////////////////
+
+@include desktop {
+
+	$total_width: 940px;
+	$container_margin: auto;
+	$gutter_width: 20px;
+
+	@include generate_helper_classes();
+
+	.content {
+		width:$total_width;
+	}
+
+
+	/* Resolucao */
+	/***********************************/
+	.resolucao {
+		&:before {
+			content: "Desktop";
+		}
+	}
+
+
+}

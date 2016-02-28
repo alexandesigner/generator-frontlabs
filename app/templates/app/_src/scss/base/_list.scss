@@ -1,0 +1,80 @@
+// ==========================================================================
+// Lists
+// ==========================================================================
+
+.list {
+	border:1px solid $light-color;
+	@extend .no-style;
+  @include border-radius($base-radius);
+	// @extend .depth;
+}
+
+
+.item {
+	position:relative;
+	line-height:22px;
+	border-bottom:1px solid $light-color;
+	color:$dark-color;
+
+	@include transition(all, 0.2s, ease-in-out);
+	&:last-child {
+		border:0;
+	}
+	&:hover {
+		background:rgba(0,0,0,.05);
+	}
+	.item-content {
+		padding:12px;
+		display:block;
+		line-height:22px;
+		color:$dark-color;
+		text-decoration: none;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+
+		@include transition(all, 0.2s, ease-in-out);
+	}
+
+	.item-title {
+		margin-top:0;line-height:22px;font-weight:500;
+		@include font-size(18px);
+	}
+	.item-description {
+		color:$divider-color;
+	}
+}
+
+.item-badge {
+  .badge {
+    position:absolute;right:15px;
+  }
+  .item-content {
+    padding-right:42px;
+  }
+}
+
+.item-avatar {
+	.item-content {
+		padding-left:50px;
+		img {
+			position:absolute;left:12px;top:9px;
+			width:28px;height:28px;margin-right:10px;
+
+			@include border-radius($base-circle-radius);
+
+		}
+	}
+}
+
+dl {
+	margin:15px 0;
+	dt {
+    font-weight: bold;
+  }
+	dd {
+		margin-bottom:5px;
+		margin-left: 0;
+	}
+}

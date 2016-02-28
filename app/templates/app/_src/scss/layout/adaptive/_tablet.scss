@@ -1,0 +1,26 @@
+/////////////////////////
+// TABLET
+////////////////////////
+
+@include tablet {
+
+	$total_width: 720px;
+	$container_margin: auto;
+	$gutter_width: 20px;
+
+	@include generate_helper_classes();
+
+	.content {
+		width:$total_width;
+	}
+
+	
+	/* Resolução */
+	/***********************************/
+	.resolucao {
+		&:before { 
+			content: "Tablet";
+		}
+	}
+
+}

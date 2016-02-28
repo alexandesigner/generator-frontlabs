@@ -1,0 +1,25 @@
+{
+  "name": "WebStarterKit",
+  "version": "0.0.1",
+  "authors": [
+    "Allan Alexandre <alexandesigner@gmail.com>"
+  ],
+  "description": "A front-end lab's generator that helps you build fast an modern web and mobile apps.",
+  "main": "app/stylesheets/styles.css",
+  "keywords": [
+    "jQuery",
+    "UIKit",
+    "Bootstrap",
+    "Foundation",
+    "Sass",
+    "Less",
+    "Gulp"
+  ],
+  "license": "MIT",
+  "dependencies": {<% if (useUIKit) { %>
+    "uikit": "^2.25.0",<% } %><% if (useFoundation) { %>
+    "foundation-sites": "^6.1.2",<% } %><% if (useBootstrap) { %>
+    "bootstrap": "^3.3.6",<% } %>
+    "jquery": "^2.1.4"
+  }
+}

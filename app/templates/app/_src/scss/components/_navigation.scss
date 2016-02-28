@@ -1,0 +1,93 @@
+// ==========================================================================
+// Navigation
+// ==========================================================================
+
+// Nav Menu
+.menu {
+  a {
+    position:relative;padding:8px 12px;text-decoration: none;
+
+    opacity:0.5;
+    @extend .transition;
+
+    &:last-child {
+      border-bottom:transparent;
+    }
+
+    &:before {
+      position:absolute;right:10px;top:8px;font-family:"baseicons";content:"\e8a8";font-size:16px;color:$dark-color;opacity:0;
+
+      @extend .transition;
+
+    }
+
+    &:hover {
+      opacity:1;background:transparent;font-weight:500;
+      &:before {
+        opacity:1;
+      }
+    }
+
+  }
+  .activated {
+    text-decoration: none;cursor: default;background:transparent;opacity:1;font-weight:500;
+
+    &:before {
+      opacity:1;
+    }
+  }
+}
+
+// Horizontal menu
+.h-menu {
+  a {
+    display:inline-block;
+    &:hover {
+      opacity:1;background:transparent;
+      &:before {
+        opacity:0;
+      }
+    }
+  }
+  .activated {
+    &:before {
+      opacity:0;
+    }
+  }
+}
+
+// Vertical menu
+.v-menu {
+  a {
+    display:block;
+  }
+}
+
+// Nav Bar
+.navbar {
+  width:100%;display:table;padding:0 10px;background:$ui-color;margin-bottom:20px;
+
+  @include border-radius($base-radius);
+
+  .title {
+    float:left;margin-right:20px;
+  }
+  .menu {
+    display:inline;
+  }
+  .search-bar {
+    float:right;
+
+    input {
+      line-height:38px;background:transparent;
+    }
+    .button-search {
+      min-height:38px;height:38px;line-height:38px;
+    }
+  }
+
+  .button {
+    height: 38px;
+    line-height: 42px;
+  }
+}

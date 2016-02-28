@@ -1,0 +1,45 @@
+<!doctype html>
+<html class="no-js" lang="en-US">
+<head>
+  <meta charset="utf-8">
+
+  <title><%= appname %></title>
+
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- favicon.ico -->
+  <link rel="shortcut icon" href="favicon.ico" sizes="32x32" type="image/x-icon" />
+
+  <!-- build:css css/styles.css --><% if (useUIKit) { %>
+  <link rel="stylesheet" href="bower_components/uikit/js/uikit.js"><% } %><% if (useBootstrap) { %>
+ <link rel="stylesheet" href="bower_components/bootstrap/dist/js/bootstrap.js"><% } %><% if (useFoundation) { %>
+  <link rel="stylesheet" href="bower_components/foundation-sites/dist/foundation.js">
+   <link rel="stylesheet" href="bower_components/what-input/what-input.js"><% } %>
+  <link rel="stylesheet" href="app/stylesheets/styles.css">
+  <!-- endbuild -->
+
+
+</head>
+<body>
+
+  <!-- Main Content -->
+  <main>
+    <div class="block">
+      <h1 class="logo">
+          <img src="images/logo.png" height="100" />
+      </h1>
+    </div>
+  </main>
+
+  <!-- build:js js/scripts.js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script><% if (useUIKit) { %>
+  <script src="bower_components/uikit/js/uikit.min.js"></script><% } %><% if (useBootstrap) { %>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script><% } %><% if (useFoundation) { %>
+  <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+  <script src="bower_components/what-input/what-input.js"></script><% } %>
+  <script src="app/js/scripts.js"></script>
+  <!-- endbuild -->
+
+</body>
+</html>

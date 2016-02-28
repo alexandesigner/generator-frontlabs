@@ -1,0 +1,52 @@
+/*
+* Front-End Lab's - v0.0.1
+*
+* Application Core (Styles)
+*
+*/
+
+// Defaults
+@import "defaults";
+
+@if $global-use-base-architecture == true {
+
+  // Helpers
+  @import "helpers/mixins";
+  @import "helpers/utilities";
+  @import "helpers/reset";
+
+  // Base
+  @import "base/fonts";
+  @import "base/text";
+  @import "base/colors";
+  @import "base/images";
+  @import "base/depths";
+  @import "base/tables";
+  @import "base/forms";
+  @import "base/grid";
+  @import "base/icons";
+  @import "base/flexbox";
+  @import "base/flexbox-grid";
+  @import "base/headings";
+  @import "base/list";
+
+  // Components
+  @import "components/alert";
+  @import "components/article";
+  @import "components/buttons";
+  @import "components/breadcrumb";
+  @import "components/badge";
+  @import "components/footer";
+  @import "components/header";
+  @import "components/navigation";
+  @import "components/panel";
+  @import "components/dialog";
+  @import "components/loading";
+  @import "components/collapse";
+  @import "components/pagination";
+
+  // Layout
+  @import "layout/main";
+  @import "layout/adaptive/adaptive";
+
+}

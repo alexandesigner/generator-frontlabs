@@ -1,0 +1,46 @@
+// ==========================================================================
+// Header Component
+// ==========================================================================
+
+.footer {
+  display:table;width:100%;padding:20px;text-align:center;color:$primary-color;
+  .footer-links {
+    margin:0 0 15px 0;
+    li {
+      position:relative;display:inline-block;margin:0 10px;
+      &:before {
+        position: absolute;
+        left: 36px;
+        top: -24px;
+        content: ".";
+        @include font-size(40px);
+        color: #fff;
+      }
+      &:last-child {
+        &:before {
+          display:none;
+        }
+      }
+      a {
+        color:$primary-color;
+      }
+    }
+  }
+  .footer-copyright {
+    @include font-size(14px);
+  }
+  .footer-logo {
+    margin:0 auto 20px auto;
+  }
+}
+
+.footer-positive {
+  border-top:1px solid $light-color;background:$primary-color;color:#fff;
+  .footer-links {
+    li {
+      a {
+        color:#fff;
+      }
+    }
+  }
+}

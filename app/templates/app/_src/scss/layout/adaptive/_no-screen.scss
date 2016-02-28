@@ -1,0 +1,21 @@
+/////////////////////////
+// LAYOUT / 0 x 320  // Smartphone
+////////////////////////
+
+@include no-screen {
+
+	body {
+		#application {
+			display:none!important;
+		}
+		&:before {
+			content: "Não disponível nesta resolução";
+			position:absolute;
+			left:20px;
+			top:20px;
+			float:left;
+			display:inline-block;
+		}
+	}
+
+}

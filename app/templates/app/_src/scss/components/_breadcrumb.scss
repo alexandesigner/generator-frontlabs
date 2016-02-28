@@ -1,0 +1,43 @@
+// ==========================================================================
+// Breadcrumb
+// ==========================================================================
+
+.breadcrumb {
+  display:table;
+  position:relative;
+  height:22px;
+  line-height:22px;
+
+  @extend .full-width;
+
+  li {
+    float:left;
+    margin-right:20px;
+    position:relative;
+    padding-right:20px;
+  	&:after {
+  		content: '\e8a8';
+  		position:absolute;
+  		right:-2px;
+  		top:-2px;
+  		font-size:$base-font-size;
+  		font-family:'baseicons';
+
+  	}
+  	&:last-child {
+  		@extend .no-margin-right;
+  		@extend .no-padding-right;
+  		&:after {
+  			display:none;
+  		}
+  	}
+  	a {
+  	    display:block;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+  	}
+  }
+}

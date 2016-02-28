@@ -1,0 +1,54 @@
+.collapse {
+
+  .collapse-item {
+    position: relative;
+    margin-bottom: 2px;
+    width: 100%;
+    color: $dark-color;
+    overflow: hidden;
+    border:1px solid $light-color;
+
+
+    @include border-radius($base-radius);
+
+
+    input {
+      position: absolute;
+      opacity: 0;
+      z-index: -1;
+    }
+    label {
+      position: relative;
+      display: block;
+      padding: 0 0 0 1em;
+      background: $ui-color;
+      font-weight: 500;
+      line-height: 3;
+      cursor: pointer;
+      @extend .transition;
+
+      &:hover {
+        background:transparent;
+      }
+
+    }
+    .collapse-content {
+      max-height: 0;
+      overflow: hidden;
+      background: rgba(255,255,255,1);
+
+      -webkit-transition: max-height .25s;
+      -o-transition: max-height .25s;
+      transition: max-height .25s;
+
+    }
+    .collapse-content p {
+      padding: 15px 10px;
+    }
+    /* :checked */
+    input:checked ~ .collapse-content {
+      max-height: 10em;
+    }
+  }
+
+}

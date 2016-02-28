@@ -1,0 +1,23 @@
+///////////////////////////
+// DESKTOP WIDE
+//////////////////////////
+
+@include desktop-wide {
+
+	$total_width: 1260px;
+	$container_margin: auto;
+	$gutter_width: 20px;
+
+	@include generate_helper_classes();
+
+	.content {
+		width:$total_width;
+	}
+
+	.resolucao {
+		&:before {
+			content: "Desktop Wide";
+		}
+	}
+
+}

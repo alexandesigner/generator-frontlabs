@@ -1,0 +1,98 @@
+// ==========================================================================
+// Pagination
+// ==========================================================================
+.pagination {
+  height:30px;line-height:30px;
+  ul {
+    height:30px;line-height:30px;
+    @extend .no-style;
+  }
+
+  li {
+    display:inline-block;min-width:28px;min-height:28px;line-height:28px;color:$divider-color;
+
+    a {
+      text-decoration: none;display:block;text-align:center;min-width:28px;min-height:28px;line-height:28px;float:left;color:$divider-color;
+
+      @extend .transition;
+      @extend .depth;
+
+
+      @include font-size(14px);font-weight:500;
+      @include border-radius($base-radius);
+
+      &:hover {
+        background:transparent;
+        color:$secondary-color;
+        @extend .depth2;
+      }
+
+      i {
+        font-size:26px;float:left;
+      }
+    }
+    &:first-child, &:last-child {
+      a {
+        background:transparent;
+        @include box-shadow(0, 0, 0, 1px, transparent, inset);
+      }
+    }
+
+    span, input {
+      float:left;text-align:center;
+    }
+    span {
+      width:100%;
+    }
+    input {
+      border:1px solid #e5e5e5;padding:0;margin:0;width:42px;margin-right:5px;color:$secondary-color;
+      @include box-shadow(0, 4px, 10px, -9px, #000, inset);
+      @include border-radius($base-radius);
+
+      @extend .transition;
+
+      &:focus, &:active, &:hover {
+        border-color:$secondary-color;
+      }
+    }
+
+  }
+  .activated {
+    a {
+      background:$secondary-color;color:#fff;
+      @include box-shadow(0, 0, 0, 1px, transparent, inset);
+      &:hover {
+        cursor:pointer!important;
+        @include box-shadow(0, 0, 0, 1px, transparent, inset);
+      }
+    }
+  }
+
+  .active {
+    color:$secondary-color!important;
+
+  }
+  .disable {
+    cursor:default;opacity:0.5;
+  }
+
+}
+
+// Rounded
+.pagination-rounded {
+  a {
+    @include border-radius($base-circle-radius!important);
+  }
+}
+
+.pagination-clear {
+  li {
+    a {
+      background:transparent!important;
+      @include box-shadow(0,0,0,0, transparent);
+    }
+  }
+  .activated {
+    a {color:$secondary-color;}
+  }
+}

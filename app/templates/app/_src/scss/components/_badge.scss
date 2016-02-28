@@ -1,0 +1,61 @@
+// ==========================================================================
+// Badge
+// ==========================================================================
+
+.badge {
+  min-width:20px;
+  height:20px;
+  line-height:20px;
+  text-align:center;
+  padding:0 8px;
+  background:$light-color;
+  color:$dark-color;
+  font-weight:600;
+  display:inline-block;
+
+  @include font-size(12px);
+  @include border-radius($base-radius);
+
+  // @extend .depth1;
+
+}
+
+// Badge notification
+.badge-notification {
+  width:20px;
+  height:20px;
+  line-height:20px;
+  text-align:center;
+  background:$light-color;
+  color:$dark-color;
+  font-weight:600;
+  display:inline-block;
+  padding:0;
+
+  @include font-size(12px);
+  @include border-radius($base-circle-radius);
+
+}
+
+// Badge rounded
+.badge-rounded {
+  @include border-radius(28px);
+}
+
+// Badge info
+.badge-info {
+  background:color($blue, 500);
+  color:color($light, 1000);
+}
+
+// Badge error
+.badge-error {
+  background-color:color($red, 500);
+  color:color($light, 1000);
+}
+
+// Badge success
+.badge-success {
+  background:#64DD17;
+  color:color($light, 1000);
+}

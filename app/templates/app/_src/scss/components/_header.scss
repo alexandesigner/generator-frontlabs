@@ -1,0 +1,171 @@
+// ==========================================================================
+// Header Component
+// ==========================================================================
+
+.bar {
+  display:table;width:100%;margin-bottom:30px;
+
+  @extend .depth1;
+
+  .bar-content {
+    position:relative;height:52px;line-height:52px;min-height:52px;
+  }
+
+  // Bar: Title
+  .title {
+    position:absolute;left:0;top:0;z-index:4;text-align:center;width:100%;font-size:24px;font-weight:400;padding:0 72px;font-family:$base-font-title;color:$primary-color;
+    img {
+      max-height:42px;margin:5px auto;
+    }
+    small {
+      font-size:14px;float:right;margin-top:16px;
+    }
+    a {
+      display:block;float:left;line-height:52px;text-decoration:none;color:$primary-color;
+    }
+  }
+
+  .button {
+    height:52px;line-height:50px;min-height:52px;color:$primary-color;float:left;
+
+    &:focus, &:hover {
+      background:rgba(0,0,0,0.06);
+
+      @include border-radius(0);
+    }
+    i {
+      @include font-size(18px);
+    }
+  }
+  // Bar: Left
+  .bar-left, .bar-right {
+    position:absolute;top:0;height:52px;z-index:5;
+  }
+  .bar-left {
+    left:0;
+  }
+  // Bar: Right
+  .bar-right {
+    right:0;
+  }
+
+  .sub-header {
+    height:32px;line-height:32px;
+
+    .sub-title {
+      font-weight:400;font-size:16px;line-height:32px;text-align:center;margin:0 auto;
+    }
+  }
+}
+
+.bar-positive {
+
+  background:$secondary-color;
+
+  a {
+    color:#fff;
+  }
+
+  .bar-content {
+    background:$secondary-color;
+  }
+
+  .sub-header {
+    background:rgba(0,0,0,.15);
+    color:rgba(255,255,255,0.7);
+  }
+
+  // Breadcrumb
+  .breadcrumb {
+    float: left;
+    margin: 5px 20px;
+    width: auto;
+  }
+
+  .button {
+      color:#fff;
+      i {color:#fff;}
+    }
+
+  // Bar: Title
+  .title {
+    color:#fff;
+    small {
+      color:#fff;font-size:14px;float:right;margin-top:16px;
+    }
+  }
+
+}
+
+
+
+// Bar Assertive
+.bar-assertive {
+
+  background:$primary-color;
+
+  a {
+    color:#fff;
+  }
+
+  .bar-content {
+    background:$primary-color;
+  }
+
+  .sub-header {
+    background:rgba(0,0,0,.15);height:32px;line-height:32px;
+
+    color:rgba(255,255,255,0.7);
+  }
+
+
+  // Breadcrumb
+  .breadcrumb {
+    float: left;
+    margin: 5px 20px;
+    width: auto;
+  }
+
+  .button {
+      color:#fff;
+      i {color:#fff;}
+    }
+
+  // Bar: Title
+  .title {
+    color:#fff;
+    small {
+      color:#fff;font-size:14px;float:right;margin-top:16px;
+    }
+  }
+
+}
+
+
+// Search bar
+.search-bar {
+  position:relative;float:left;padding-left:32px;
+  .input-field {
+    line-height:52px;padding:0;
+
+    @extend .no-depth;
+    &:focus, &:hover {
+      border-color: $secondary-color;
+      outline: 0;
+    }
+  }
+  .button-search {
+    height:52px;line-height:50px;min-height:52px;color:$secondary-color;
+
+    position:absolute;left:0;padding:0;
+
+    &:focus, &:hover {
+      background:rgba(0,0,0,0.06);
+
+      @include border-radius(0);
+    }
+    i {
+      @include font-size(18px);
+    }
+  }
+}

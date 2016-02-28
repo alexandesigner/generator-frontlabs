@@ -1,0 +1,23 @@
+{
+  "name": "generator-frontlabs",
+  "version": "0.0.1",
+  "description": "A front-end lab's generator that helps you build fast an modern web and mobile apps.",
+  "main": "app/index.js",
+  "license": "MIT",
+  "repository": "allanalexandre/generator-frontlabs",
+  "author": "Allan Alexandre",
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "frontlabs",
+    "generator-frontlabs",
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "mkdirp": "^0.5.1",
+    "yeoman-generator": "^0.20.3",
+    "yosay": "^1.1.0"
+  }
+}

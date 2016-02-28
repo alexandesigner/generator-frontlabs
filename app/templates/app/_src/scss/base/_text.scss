@@ -1,0 +1,93 @@
+// ==========================================================================
+// Text
+// ==========================================================================
+
+
+// Text alignment
+.text-left {
+  text-align:left;
+}
+.text-center {
+  text-align:center;
+}
+.text-right {
+  text-align:right;
+}
+.text-justify {
+  text-align:justify;
+}
+.text-nowrap {
+  @include text-nowrap;
+}
+
+// Text lower upper capitalize
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+// Font weight
+.weight-light {
+  font-weight:200;
+}
+.weight-normal {
+  font-weight:400;
+}
+.weight-semibold {
+  font-weight:500;
+}
+.weight-bold {
+  font-weight:800;
+}
+
+// Font Smoothing
+.smooth-out {
+  @include font-smoothing(off);
+}
+.smooth-in {
+  @include font-smoothing(on);
+}
+
+// Blockquote
+blockquote {
+  @include font-size(28px);
+  line-height: 32px;
+  font-style: italic;
+  font-family:georgia;
+  letter-spacing: -1px;
+	footer {
+	  @include font-size(16px);
+	  font-family: $base-font-text;
+	  font-style: normal;
+	  letter-spacing: 0.02em;
+	  color:#999;
+	  margin-top:10px
+	}
+
+}
+blockquote.full {
+	width:100%;
+	display:inline-block;
+	margin-left: -$base-spacing-unit;
+    margin-right: -$base-spacing-unit;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+blockquote.right {
+	max-width:320px;
+	float:right;
+	padding:$base-spacing-unit 0 $base-spacing-unit $base-spacing-unit;
+}
+
+blockquote.left {
+	max-width:320px;
+	float:left;
+	padding:$base-spacing-unit $base-spacing-unit $base-spacing-unit 0;
+	text-align:right;
+}

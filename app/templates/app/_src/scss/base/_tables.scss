@@ -1,0 +1,66 @@
+// ==========================================================================
+// Table
+// ==========================================================================
+
+// Table reset
+table, th, td {
+  border: none;
+}
+table {
+  width: 100%;display: table;  border-spacing: 0;border-collapse: separate;
+}
+thead {
+  background:#f4f4f4;border-bottom: 1px solid rgba(0, 0, 0, 0.04);font-weight:400;
+}
+td, th {
+  padding: 12px 15px;
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+  background-clip: padding-box;
+  @include border-radius(2px);
+}
+tbody td {
+  @include font-size(15px);
+}
+
+// Bordered
+.bordered {
+  border:1px solid rgba(0,0,0, 0.08);
+
+  @include border-radius(4px);
+
+	tr {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    &:last-child {
+      border:0;
+    }
+	}
+}
+
+// Striped
+.striped {
+  thead {
+    background:#fff;
+  }
+	tbody {
+		tr {
+			&:nth-child(odd) { background-color: #f2f2f2; }
+		}
+	}
+}
+
+// Centered
+.centered {
+	thead tr th, tbody tr td { text-align: center; }
+}
+
+// Hoverable
+.hoverable {
+	tbody {
+	 tr {
+	 	@extend .transition;
+	 	&:hover { background-color: #f2f2f2; }
+	 }
+	}
+}

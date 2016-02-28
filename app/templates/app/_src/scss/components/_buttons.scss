@@ -1,0 +1,130 @@
+// ==========================================================================
+// Buttons
+// ==========================================================================
+
+.button {
+  position:relative;
+  margin: 0;
+  padding: 0 12px;
+  border: none;
+  overflow: visible;
+  outline: 0;
+  text-transform: none;
+  display: inline-block;
+  vertical-align: middle;
+  background:color($light, 1000);
+  min-height:32px;
+  line-height:32px;
+  color:$dark-opacity-color;
+  vertical-align: middle;
+  @include font-size(16px);
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-appearance: none;
+
+  @extend .depth1;
+
+  @include transition(all, 0.2s, ease-in-out);
+  @include box-sizing(border-box);
+  @include border-radius($base-radius);
+
+  &:hover {
+    opacity:1;
+    @extend .depth2;
+  }
+
+  &:active {
+    @extend .depth3;
+  }
+
+  // Button icon
+  i {
+    font-size:$base-font-size;
+  }
+
+
+  // Badge Notification
+  .badge-notification {
+    position:absolute;top:1px;right:1px;
+    @extend .depth;
+  }
+
+}
+
+// Button Rounded
+.button-rounded {
+  @include border-radius($base-rounded-radius);
+}
+
+// Button Clear
+.button-clear {
+  background:transparent;
+  @extend .no-depth;
+
+  &:hover {
+    //opacity:0.8;
+    @extend .no-depth;
+  }
+  &:active {
+    opacity:0.6;
+    @extend .no-depth;
+  }
+}
+
+// Button Circle
+.button-circle {
+  @include border-radius($base-circle-radius);
+  min-height:38px;
+  line-height:38px;
+  min-width:38px;
+  width:38px;
+  padding:0;
+  i {font-size:12px;}
+}
+
+// Button Rounded
+.button-bordered {
+  @include box-shadow(0, 0, 0, 2px, rgba(0,0,0,.08));
+  &:hover {
+    @include box-shadow(0, 0, 0, 2px, rgba(0,0,0,.2));
+  }
+  &:active {
+    @include box-shadow(0, 0, 0, 2px, rgba(0,0,0,.06));
+  }
+
+}
+
+// Button Bordered White
+.button-bordered-white {
+  @include box-shadow(0, 0, 0, 2px, rgba(255,255,255,1));
+  &:hover {
+    @include box-shadow(0, 0, 0, 2px, rgba(255,255,255,0.9));
+  }
+  &:active {
+    @include box-shadow(0, 0, 0, 2px, rgba(255,255,255,0.6));
+  }
+}
+
+// Button Error
+.button-error {
+  background-color:color($red, 500);
+  color:color($light, 1000);
+  i {color:color($light, 1000);}
+}
+// Button Success
+.button-success {
+  background:#64DD17;
+  color:color($light, 1000);
+}
+// Button Info
+.button-info {
+  background:color($blue, 500);
+  color:color($light, 1000);
+}
+// Button Assertive
+.button-assertive {
+  background:color($orange, 500);
+  color:color($light, 1000);
+}

@@ -1,0 +1,90 @@
+// ==========================================================================
+// Images
+// ==========================================================================
+
+// Images Helpers
+img{
+  display:block;
+  max-width:100%;
+  color: transparent;
+	font-size: 0;
+	vertical-align: middle;
+  border:0;
+	-ms-interpolation-mode: bicubic;
+
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+legend {
+    border: 0;
+    padding: 0;
+}
+
+// Image Not Responsive
+img[width],
+img[height]{
+    max-width:none;
+}
+
+// Images
+img.responsive-img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Image Alignments
+.img-right{
+    float:right;
+    margin:0 0 30px 25px;
+}
+.img-left{
+    float:left;
+    margin:0 25px 30px 0;
+}
+.img-center{
+    display:block;
+    margin-right:auto;
+    margin-bottom:30px;
+    margin-left:auto;
+}
+
+// Reset block image
+figure {
+  margin:0;position:relative;
+  img { display:block; }
+  figcaption {
+    position:absolute;padding:10px;color:#fff;bottom:0;background:rgba(0,0,0,.6);
+  }
+}
+
+// Image Rounded
+.img-rounded {
+  @include border-radius($base-radius);
+
+  img {
+    @include border-radius($base-radius);
+  }
+
+  figcaption {
+    @include border-radius-separate(0, 0, 5px, 5px);
+    strong {margin:0!important;}
+  }
+}
+
+// Image Circle
+.img-circle {
+  @include border-radius($base-circle-radius);
+  img {
+    @include border-radius($base-circle-radius);
+  }
+}
+
+// Image Thumbnails
+.img-thumbnail {
+    padding:5px;border:1px solid rgba(0, 0, 0, 0.08);
+
+    &:hover {
+        border-color:rgba(0, 0, 0, 0.1);;
+    }
+}
