@@ -186,7 +186,7 @@ module.exports = yeoman.generators.Base.extend({
 
       // Create directories
       mkdirp('app');
-      mkdirp('src');
+      mkdirp('app/src');
 
       // Scripts
       this.fs.copy(
