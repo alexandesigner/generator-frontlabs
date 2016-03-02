@@ -3,9 +3,9 @@ var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 var chalk = require('chalk');
 var mkdirp = require('mkdirp');
-var taskRunners;
 var styleLang;
 var userInterface;
+var frameworkJS;
 
 module.exports = yeoman.generators.Base.extend({
 
@@ -20,23 +20,23 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have greet the user.
     this.log(yosay(
-      'Welcome, let\'s generate a ' + chalk.blue('frontlabs') + ' A front-end labs generator that helps you build fast an modern web and mobile apps.'
+      'Welcome a ' + chalk.yellow('Front-End Labs') + ' the generator that helps you build fast an modern web and mobile apps.'
     ));
 
     // Questions
     var prompts = [{
       name: 'appName',
       message: 'What is your app\'s name ?',
-      default: 'frontlabs',
+      default: 'appName',
     },
     {
       type: 'list',
-      name: 'taskRunner',
-      message: 'Would you like to use a Task-Runner for compiling?',
+      name: 'frameworkJS',
+      message: 'Would you like to use a Framework?',
       choices: [
         {
-          name: 'Gulp',
-          value: 'gulp'
+          name: 'Angular',
+          value: 'angular'
         },
         {
           name: 'None',
@@ -54,6 +54,10 @@ module.exports = yeoman.generators.Base.extend({
           value: 'Scss'
         },
         {
+          name: 'SASS',
+          value: 'sass'
+        },
+        {
           name: 'less',
           value: 'Less'
         },
@@ -65,16 +69,16 @@ module.exports = yeoman.generators.Base.extend({
     },
     {
       type: 'list',
-      name: 'chooseui',
-      message: 'Would you like to use a Framework?',
+      name: 'userInterface',
+      message: 'Would you like to use a User Interface (Boilerplate)?',
       choices: [
-        {
-          name: 'UIKit',
-          value: 'uikit'
-        },
         {
           name: 'Bootstrap',
           value: 'bootstrap'
+        },
+        {
+          name: 'UIKit',
+          value: 'uikit'
         },
         {
           name: 'Foundation',
@@ -90,38 +94,41 @@ module.exports = yeoman.generators.Base.extend({
     // Arguments Prompt
     this.prompt(prompts, function (props) {
 
-      this.appName               = props.appName;
-      userInterface                = props.chooseui;
-      taskRunners                  = props.taskRunner;
-      styleLang                        = props.styleLang;
+      this.appName = props.appName;
+      frameworkJS = props.frameworkJS;
+      userInterface = props.userInterface;
+      styleLang = props.styleLang;
 
-      this.useGulp                  = false;
-      this.useUIKit                 = false;
-      this.useBootstrap       = false;
-      this.useFoundation    = false;
-      this.Scss                         = false;
-      this.Less                         = false;
+      this.useAngular = false;
 
-      function wantsTaskrunner(tr) {
-        return taskRunners && taskRunners.indexOf(tr) !== -1;
-      }
+      this.useUIKit = false;
+      this.useBootstrap = false;
+      this.useFoundation = false;
+      this.Scss = false;
+      this.SASS = false;
+      this.Less = false;
+
       function wantsFramework(fw) {
-        return userInterface && userInterface.indexOf(fw) !== -1;
+        return frameworkJS && frameworkJS.indexOf(fw) !== -1;
+      }
+      function wantsUserInterface(ui) {
+        return userInterface && userInterface.indexOf(ui) !== -1;
       }
       function wantsStyleLang(sl) {
         return styleLang && styleLang.indexOf(sl) !== -1;
       }
 
-      // Task Runner Compiling
-      this.useGulp = wantsTaskrunner('gulp');
+      // FrameworkJS
+      this.useAngular = wantsFramework('angular');
 
-      // Framework
-      this.useUIKit =  wantsFramework('uikit');
-      this.useBootstrap  = wantsFramework('bootstrap');
-      this.useFoundation =  wantsFramework('foundation');
+      // User Interface
+      this.useUIKit =  wantsUserInterface('uikit');
+      this.useBootstrap  = wantsUserInterface('bootstrap');
+      this.useFoundation =  wantsUserInterface('foundation');
 
       // Styles
       this.Scss = wantsStyleLang('Scss');
+      this.SASS = wantsStyleLang('SASS');
       this.Less = wantsStyleLang('Less');
 
       done();
@@ -138,10 +145,12 @@ module.exports = yeoman.generators.Base.extend({
     // App Context
     app: function () {
       var context = {
+          useAngular: this.useAngular,
           useUIKit: this.useUIKit,
           useBootstrap: this.useBootstrap,
           useFoundation: this.useFoundation,
           Scss: this.Scss,
+          SASS: this.SASS,
           Less: this.Less
       };
       this.template('_bower.json', 'bower.json', context);
@@ -153,11 +162,12 @@ module.exports = yeoman.generators.Base.extend({
       // Context Files
       var context = {
         appname: this.appName,
+        useAngular: this.useAngular,
         useUIKit: this.useUIKit,
         useBootstrap: this.useBootstrap,
         useFoundation: this.useFoundation,
-        appName: this.appName,
         Scss: this.Scss,
+        SASS: this.SASS,
         Less: this.Less
       };
 
@@ -179,20 +189,27 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('.bowerrc')
       );
 
-      // Use Gulp
-      if (this.useGulp) {
-        this.template("_gulpfile.js", "gulpfile.js", context);
-      }
+      // Gulpfile
+      this.template('_gulpfile.js', 'gulpfile.js', context);
 
       // Create directories
       mkdirp('app');
       mkdirp('app/src');
 
-      // Scripts
-      this.fs.copy(
-        this.templatePath('app/_js'),
-        this.destinationPath('app/js')
-      );
+      // Use Angular
+      if (this.useAngular) {
+          this.template('app/_js/_controllers/controllers.js', 'app/js/controllers/controllers.js', context);
+          this.template('app/_js/_directives/directives.js', 'app/js/directives/directives.js', context);
+          this.template('app/_js/_filters/filters.js', 'app/js/filters/filters.js', context);
+          this.template('app/_js/_models/models.js', 'app/js/models/models.js', context);
+          this.template('app/_js/_services/services.js', 'app/js/services/services.js', context);
+          this.template('app/_js/_app.js', 'app/js/app.js', context);
+          this.template('app/_public/templates.js', 'app/public/templates.js', context);
+          this.directory(
+            this.templatePath('app/_js/_templates'),
+            this.destinationPath('app/js/templates')
+          );
+      }
 
       // Styles
       this.directory(
@@ -200,12 +217,37 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('app/css')
       );
 
+      if (!this.Scss || this.SASS || this.Less) {
+        this.template('app/_css/styles.css', 'app/css/styles.css', context);
+      };
+
+      // SCSS
       if (this.Scss) {
         mkdirp('app/src/scss');
         this.template('app/_src/scss', 'app/src/scss', context);
         this.directory(
-          this.templatePath('app/_src/_scss'),
+          this.templatePath('app/_src/scss'),
           this.destinationPath('app/src/scss')
+        );
+      }
+
+      // SASS
+      if (this.SASS) {
+        mkdirp('app/src/sass');
+        this.template('app/_src/sass', 'app/src/sass', context);
+        this.directory(
+          this.templatePath('app/_src/_sass'),
+          this.destinationPath('app/src/sass')
+        );
+      }
+
+      // Less
+      if (this.Less) {
+        mkdirp('app/src/less');
+        this.template('app/_src/less', 'app/src/less', context);
+        this.directory(
+          this.templatePath('app/_src/_less'),
+          this.destinationPath('app/src/less')
         );
       }
 
@@ -221,6 +263,11 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('app/fonts')
       );
 
+      // Scripts
+      if (!this.useAngular) {
+        this.template("app/_js/_scripts.js", "app/js/scripts.js", context);
+      }
+
       // HTML
       this.template("_index.html", "index.html", context);
     },
@@ -234,13 +281,11 @@ module.exports = yeoman.generators.Base.extend({
     });
 
     this.on('end', function () {
-      if(taskRunners != 'none') {
-        this.log(yosay(
-          'Yeah! You\'re all set and done!' +
-          ' Now simply run ' + chalk.blue.italic('\''+taskRunners+'\'') + ' and start coding!'
-        ));
-        this.spawnCommand('gulp');
-      }
+      this.log(yosay(
+        'Yeah! You\'re all set and done!' +
+        ' Now simply run and start coding!'
+      ));
+      this.spawnCommand('gulp');
     });
 
   }

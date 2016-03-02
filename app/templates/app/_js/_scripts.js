@@ -1,5 +1,5 @@
 /*
-* WebStarterKit - v0.0.1
+* Front-End Lab's - v0.0.1
 *
 * Application Core (Scripts)
 *

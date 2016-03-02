@@ -7,11 +7,13 @@
   "description": "A front-end lab's that helps you build fast an modern web and mobile apps.",
   "main": "app/css/styles.css",
   "keywords": [
+    "Angular",
     "jQuery",
     "UIKit",
     "Bootstrap",
     "Foundation",
     "Sass",
+    "SASS",
     "Less",
     "Gulp"
   ],
@@ -19,7 +21,9 @@
   "dependencies": {<% if (useUIKit) { %>
     "uikit": "^2.25.0",<% } %><% if (useFoundation) { %>
     "foundation-sites": "^6.1.2",<% } %><% if (useBootstrap) { %>
-    "bootstrap": "^3.3.6",<% } %>
+    "bootstrap": "^3.3.6",<% } %><% if (useAngular) { %>
+    "angular": "^1.5.0",
+    "angular-ui-router": "^0.2.18",<% } %>
     "jquery": "^2.1.4"
   }
 }
