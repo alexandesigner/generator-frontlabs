@@ -2,16 +2,10 @@
 
 A front-end lab's generator that helps you build fast an modern web and mobile apps.
 
-### Requirements
-
-* node
-* npm
-* gulp
-* bower
-* yeoman
+### Install
 
 ```
-$ npm install -g yo bower generator-frontlabs
+$ npm i -g yo bower gulp generator-frontlabs
 ```
 
 ### Use
@@ -23,3 +17,11 @@ $ mkdir appname
 $ cd appname
 $ yo frontlabs
 ```
+
+### Requirements
+
+* node
+* npm
+* yeoman
+* bower
+* gulp
