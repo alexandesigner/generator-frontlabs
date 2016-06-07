@@ -8,7 +8,8 @@
   var watch = require('gulp-watch');<% if (Scss || SASS) { %>
   var sass = require('gulp-sass');<% } %><% if (Less) { %>
   var less = require('gulp-less');
-  var path = require('path');<% } %>
+  var path = require('path');<% } %><% if (Stylus) { %>
+  var stylus = require('gulp-stylus');<% } %>
   var gutil = require('gulp-util');
   var jshint = require('gulp-jshint');
   var connect = require('gulp-connect');
@@ -25,15 +26,15 @@
 
   // Assets Paths
   var paths = {
-    html:    ['index.html'],<% if (!useAngular) { %>
-    scripts: ['app/js/scripts.js'],<% } %><% if (useAngular) { %>
-    scripts: ['app/js/controllers/*.js', 'app/js/directives/*.js', 'app/js/filters/*.js', 'app/js/models/*.js', 'app/js/services/*.js', 'app/js/app.js'],<% } %><% if (Scss) { %>
-    sass:  ['app/src/scss/**/*.scss'],<% } %><% if (SASS) { %>
-    sass:  ['app/src/sass/**/*.sass'],<% } %><% if (Less) { %>
-    less:  ['app/src/less/**/*.less'],<% } %><% if ( !SASS || Less || Scss  ) { %>
-    styles:  ['app/css/**/*.css'],<% } %>
-    scripts: ['app/js/scripts.js'],
-    images:  ['app/images/**/*']
+    html:     ['index.html'],<% if (!useAngular) { %>
+    scripts:  ['app/js/scripts.js'],<% } %><% if (useAngular) { %>
+    angular:  ['app/js/controllers/*.js', 'app/js/directives/*.js', 'app/js/filters/*.js', 'app/js/models/*.js', 'app/js/services/*.js', 'app/js/app.js'],<% } %><% if (SASS) { %>
+    sass:     ['app/src/sass/**/*.sass'],<% } %><% if (Scss) { %>
+    scss:     ['app/src/scss/**/*.scss'],<% } %><% if (Stylus) { %>
+    stylus:   ['app/src/stylus/**/*.styl'],<% } %><% if (Less) { %>
+    less:     ['app/src/less/**/*.less'],<% } %><% if ( !SASS || Less || Scss || Stylus  ) { %>
+    styles:   ['app/css/**/*.css'],<% } %>
+    images:   ['app/images/**/*']
   };
 
   // Connection =============== //
@@ -49,11 +50,20 @@
   });
 
   // Stylesheets =============== //
-  <% if (!Less) { %>
-    gulp.task('styles', function () {<% if (!Less || Scss || SASS) { %>
-    return gulp.src(paths.styles)<% } %><% if (Scss || SASS) { %>
-    return gulp.src(paths.sass)
-      .pipe(sass({outputStyle: 'expanded', errLogToConsole: true}))<% } %>
+
+  <% if (!SASS || Less || Scss || Stylus) { %>
+    gulp.task('styles', function () {
+    return gulp.src(paths.styles)
+      .pipe(gulp.dest('app/css'))
+      .pipe(connect.reload());
+    });
+  <% } %>
+
+  <% if (SASS || Scss) { %>
+    gulp.task('sass', function () {<% if (Scss) { %>
+    return gulp.src(paths.scss)<% } %><% if (SASS) { %>
+    return gulp.src(paths.sass)<% } %>
+      .pipe(sass({outputStyle: 'expanded', errLogToConsole: true}))
       .pipe(concat('styles.css'))
       .pipe(gulp.dest('app/css'))
       .pipe(connect.reload());
@@ -66,6 +76,16 @@
       .pipe(less({
         paths: [ path.join(__dirname, 'less', 'includes') ]
       }))
+      .pipe(concat('styles.css'))
+      .pipe(gulp.dest('app/css'))
+      .pipe(connect.reload());
+  });
+<% } %>
+
+<% if (Stylus) { %>
+    gulp.task('stylus', function () {
+    return gulp.src(paths.stylus)
+      .pipe(stylus())
       .pipe(concat('styles.css'))
       .pipe(gulp.dest('app/css'))
       .pipe(connect.reload());
@@ -136,13 +156,6 @@
     .pipe(gulp.dest(imgDst));
   });
 
-  // Build Fonts =============== //
-  gulp.task('fonts', function() {
-    gulp.src('app/fonts/**/*.{ttf,woff,eof,svg}')
-    .pipe(gulp.dest('build/fonts'));
-  });
-
-
   // Obseravator =============== //
   gulp.task('watch', function() {
     gulp.watch(paths.html, ['html']);
@@ -150,7 +163,7 @@
   });
 
   // Run tasks =============== //
-  <% if (!useAngular) { %>gulp.task('default', [ 'html', 'useref', 'imagemin',  'fonts', 'styles', 'watch', 'connect' ]);<% } %><% if (useAngular) { %>
-  gulp.task('default', [ 'html', 'public', 'useref', 'fonts', 'imagemin', 'templates', 'styles', 'watch', 'connect' ]);<% } %>
+  <% if (!useAngular) { %>gulp.task('default', [ 'html', 'useref', 'imagemin',  'styles', 'watch', 'connect' ]);<% } %><% if (useAngular) { %>
+  gulp.task('default', [ 'html', 'public', 'useref', 'imagemin', 'templates', 'styles', 'watch', 'connect' ]);<% } %>
 
 }(require));

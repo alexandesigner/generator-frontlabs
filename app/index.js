@@ -38,6 +38,14 @@ module.exports = yeoman.generators.Base.extend({
           name: 'Angular',
           value: 'angular'
         },
+        // {
+        //   name: 'React',
+        //   value: 'react'
+        // },
+        // {
+        //   name: 'Vue',
+        //   value: 'vue'
+        // },
         {
           name: 'None',
           value: 'none'
@@ -62,6 +70,10 @@ module.exports = yeoman.generators.Base.extend({
           value: 'Less'
         },
         {
+          name: 'Stylus',
+          value: 'Stylus'
+        },
+        {
           name: 'None',
           value: 'none'
         }
@@ -84,6 +96,10 @@ module.exports = yeoman.generators.Base.extend({
           name: 'Foundation',
           value: 'foundation'
         },
+        // {
+        //   name: 'Style Guide',
+        //   value: 'StyleGuide'
+        // },
         {
           name: 'None',
           value: 'none'
@@ -100,13 +116,17 @@ module.exports = yeoman.generators.Base.extend({
       styleLang = props.styleLang;
 
       this.useAngular = false;
+      // this.useReact = false;
+      // this.useVue = false;
 
       this.useUIKit = false;
       this.useBootstrap = false;
       this.useFoundation = false;
+      this.useStyleGuide = false;
       this.Scss = false;
       this.SASS = false;
       this.Less = false;
+      this.Stylus = false;
 
       function wantsFramework(fw) {
         return frameworkJS && frameworkJS.indexOf(fw) !== -1;
@@ -120,16 +140,20 @@ module.exports = yeoman.generators.Base.extend({
 
       // FrameworkJS
       this.useAngular = wantsFramework('angular');
+      // this.useReact = wantsFramework('react');
+      // this.useVue = wantsFramework('vue');
 
       // User Interface
-      this.useUIKit =  wantsUserInterface('uikit');
+      this.useUIKit      =  wantsUserInterface('uikit');
       this.useBootstrap  = wantsUserInterface('bootstrap');
       this.useFoundation =  wantsUserInterface('foundation');
+      this.useStyleGuide =  wantsUserInterface('styleguide');
 
       // Styles
-      this.Scss = wantsStyleLang('Scss');
-      this.SASS = wantsStyleLang('SASS');
-      this.Less = wantsStyleLang('Less');
+      this.Scss   = wantsStyleLang('Scss');
+      this.SASS   = wantsStyleLang('SASS');
+      this.Less   = wantsStyleLang('Less');
+      this.Stylus = wantsStyleLang('Stylus');
 
       done();
     }.bind(this));
@@ -146,12 +170,16 @@ module.exports = yeoman.generators.Base.extend({
     app: function () {
       var context = {
           useAngular: this.useAngular,
+          // useReact: this.useReact,
+          // useVue: this.useVue,
           useUIKit: this.useUIKit,
           useBootstrap: this.useBootstrap,
           useFoundation: this.useFoundation,
+          useStyleGuide: this.useStyleGuide,
           Scss: this.Scss,
           SASS: this.SASS,
-          Less: this.Less
+          Less: this.Less,
+          Stylus: this.Stylus
       };
       this.template('_bower.json', 'bower.json', context);
     },
@@ -163,12 +191,16 @@ module.exports = yeoman.generators.Base.extend({
       var context = {
         appname: this.appName,
         useAngular: this.useAngular,
+        // useReact: this.useReact,
+        // useVue: this.useVue,
         useUIKit: this.useUIKit,
         useBootstrap: this.useBootstrap,
         useFoundation: this.useFoundation,
+        useStyleGuide: this.useStyleGuide,
         Scss: this.Scss,
         SASS: this.SASS,
-        Less: this.Less
+        Less: this.Less,
+        Stylus: this.Stylus
       };
 
       // Editor Config
@@ -217,7 +249,7 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('app/css')
       );
 
-      if (!this.Scss || this.SASS || this.Less) {
+      if (!this.Scss || this.SASS || this.Less || this.Stylus) {
         this.template('app/_css/styles.css', 'app/css/styles.css', context);
       };
 
@@ -251,16 +283,20 @@ module.exports = yeoman.generators.Base.extend({
         );
       }
 
+      // Stylus
+      if (this.Stylus) {
+        mkdirp('app/src/stylus');
+        this.template('app/_src/stylus', 'app/src/stylus', context);
+        this.directory(
+          this.templatePath('app/_src/stylus'),
+          this.destinationPath('app/src/stylus')
+        );
+      }
+
       // Images
       this.directory(
         this.templatePath('app/_images'),
         this.destinationPath('app/images')
-      );
-
-      // Fonts
-      this.directory(
-        this.templatePath('app/_fonts'),
-        this.destinationPath('app/fonts')
       );
 
       // Scripts
@@ -269,7 +305,7 @@ module.exports = yeoman.generators.Base.extend({
       }
 
       // HTML
-      this.template("_index.html", "index.html", context);
+      this.template("app/_index.html", "app/index.html", context);
     },
   },
 
