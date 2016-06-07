@@ -32,7 +32,7 @@
     sass:     ['app/src/sass/**/*.sass'],<% } %><% if (Scss) { %>
     scss:     ['app/src/scss/**/*.scss'],<% } %><% if (Stylus) { %>
     stylus:   ['app/src/stylus/**/*.styl'],<% } %><% if (Less) { %>
-    less:     ['app/src/less/**/*.less'],<% } %><% if ( !SASS || Less || Scss || Stylus  ) { %>
+    less:     ['app/src/less/**/*.less'],<% } %><% if ( !SASS && !Less && !Scss && !Stylus  ) { %>
     styles:   ['app/css/**/*.css'],<% } %>
     images:   ['app/images/**/*']
   };
@@ -51,7 +51,7 @@
 
   // Stylesheets =============== //
 
-  <% if (!SASS || Less || Scss || Stylus) { %>
+  <% if (!SASS && !Less && !Scss && !Stylus) { %>
     gulp.task('styles', function () {
     return gulp.src(paths.styles)
       .pipe(gulp.dest('app/css'))
@@ -59,8 +59,8 @@
     });
   <% } %>
 
-  <% if (SASS || Scss) { %>
-    gulp.task('sass', function () {<% if (Scss) { %>
+  <% if (SASS && !Scss) { %>
+    gulp.task('styles', function () {<% if (Scss) { %>
     return gulp.src(paths.scss)<% } %><% if (SASS) { %>
     return gulp.src(paths.sass)<% } %>
       .pipe(sass({outputStyle: 'expanded', errLogToConsole: true}))
@@ -83,7 +83,7 @@
 <% } %>
 
 <% if (Stylus) { %>
-    gulp.task('stylus', function () {
+    gulp.task('styles', function () {
     return gulp.src(paths.stylus)
       .pipe(stylus())
       .pipe(concat('styles.css'))
