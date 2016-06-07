@@ -1,9 +1,5 @@
-// ========================================================================== //
-//   Global require
-// ========================================================================== //
 (function (require) {
 
-  // Variables =============== //
   var gulp = require('gulp');
   var watch = require('gulp-watch');<% if (Scss || SASS) { %>
   var sass = require('gulp-sass');<% } %><% if (Less) { %>
@@ -21,10 +17,8 @@
   var psi = require('psi');<% if (useAngular) { %>
   var templateCache = require('gulp-angular-templatecache');<% } %>
 
-  // URL Site
   var site = 'http://www.frontlabs.com.br';
 
-  // Assets Paths
   var paths = {
     html:     ['index.html'],<% if (!useAngular) { %>
     scripts:  ['app/js/scripts.js'],<% } %><% if (useAngular) { %>
@@ -37,7 +31,6 @@
     images:   ['app/images/**/*']
   };
 
-  // Connection =============== //
   gulp.task('connect', function() {
     connect.server({
       root: 'app',
@@ -49,7 +42,6 @@
     });
   });
 
-  // Stylesheets =============== //
   <% if (!SASS && !Less && !Scss && !Stylus) { %>
     gulp.task('styles', function () {
     return gulp.src(paths.styles)
@@ -87,13 +79,11 @@
   });
 <% } %>
 
-  // HTML =============== //
   gulp.task('html', function () {
     return gulp.src(paths.html)
     .pipe(connect.reload());
   });
 
-  // JSHint =============== //
   gulp.task('jshint', function() {
     gulp.src(paths.scripts)
       .pipe(jshint())
@@ -101,14 +91,12 @@
   });
 
   <% if (useAngular) { %>
-  // Templates Cache =============== //
   gulp.task('templates', function () {
     return gulp.src('app/js/templates/**/*.html')
     .pipe(templateCache())
     .pipe(gulp.dest('app/public'))
   });
 
-  // Public TemplatesCache =============== //
   gulp.task('public', function () {
     return gulp.src('app/public/templates.js')
     .pipe(gulp.dest('build/public'))
@@ -116,7 +104,6 @@
 
   <% } %>
 
-  // Mobile
   gulp.task('psi-mobile', function (cb) {
     psi({
         nokey: 'true',
@@ -125,7 +112,6 @@
     }, cb);
   });
 
-  // Desktop
   gulp.task('psi-desktop', function (cb) {
     psi({
         nokey: 'true',
@@ -134,14 +120,12 @@
     }, cb);
   });
 
-  // Build Concat/Compile =============== //
   gulp.task('useref', function () {
     return gulp.src(paths.html)
       .pipe(useref())
       .pipe(gulp.dest('app'));
   });
 
-  // Imagemin =============== //
   gulp.task('imagemin', function() {
     var  imgSrc = paths.images,
             imgDst = 'app/images';
@@ -151,7 +135,6 @@
     .pipe(gulp.dest(imgDst));
   });
 
-  // Obseravator =============== //
   gulp.task('watch', function() {
     gulp.watch(paths.html, ['html']);<% if (Scss) { %>
     gulp.watch(paths.scss, ['styles']);<% } %><% if (SASS) { %>
@@ -161,7 +144,6 @@
     gulp.watch(paths.styles, ['styles']);<% } %>
   });
 
-  // Run tasks =============== //
   <% if (!useAngular) { %>gulp.task('default', [ 'html', 'useref', 'imagemin',  'styles', 'watch', 'connect' ]);<% } %><% if (useAngular) { %>
   gulp.task('default', [ 'html', 'public', 'useref', 'imagemin', 'templates', 'styles', 'watch', 'connect' ]);<% } %>
 

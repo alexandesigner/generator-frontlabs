@@ -4,4 +4,7 @@
 * Application Core (CSS)
 *
 */
-.css {}
+
+body {
+  background: #fff;
+}
