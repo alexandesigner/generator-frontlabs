@@ -32,7 +32,7 @@
     sass:     ['app/src/sass/**/*.sass'],<% } %><% if (Scss) { %>
     scss:     ['app/src/scss/**/*.scss'],<% } %><% if (Stylus) { %>
     stylus:   ['app/src/stylus/**/*.styl'],<% } %><% if (Less) { %>
-    less:     ['app/src/less/**/*.less'],<% } %><% if ( !SASS && !Less && !Scss && !Stylus  ) { %>
+    less:     ['app/src/less/**/*.less'],<% } %><% if ( !SASS && !Less && !Scss && !Stylus ) { %>
     styles:   ['app/css/**/*.css'],<% } %>
     images:   ['app/images/**/*']
   };
@@ -59,7 +59,7 @@
     });
   <% } %>
 
-  <% if (SASS && Scss) { %>
+  <% if (SASS || Scss) { %>
     gulp.task('styles', function () {<% if (Scss) { %>
     return gulp.src(paths.scss)<% } %><% if (SASS) { %>
     return gulp.src(paths.sass)<% } %>

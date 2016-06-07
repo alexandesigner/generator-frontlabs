@@ -1,6 +1,6 @@
 {
   "name": "generator-frontlabs",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Generator choose what you want to use to build fast an modern web and mobile apps.",
   "main": "app/index.js",
   "license": "MIT",

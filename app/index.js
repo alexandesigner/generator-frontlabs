@@ -63,7 +63,7 @@ module.exports = yeoman.generators.Base.extend({
         },
         {
           name: 'SASS',
-          value: 'sass'
+          value: 'SASS'
         },
         {
           name: 'less',
