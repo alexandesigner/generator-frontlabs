@@ -59,7 +59,7 @@
     });
   <% } %>
 
-  <% if (SASS && !Scss) { %>
+  <% if (SASS && Scss) { %>
     gulp.task('styles', function () {<% if (Scss) { %>
     return gulp.src(paths.scss)<% } %><% if (SASS) { %>
     return gulp.src(paths.sass)<% } %>
