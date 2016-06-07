@@ -50,15 +50,12 @@
   });
 
   // Stylesheets =============== //
-
   <% if (!SASS && !Less && !Scss && !Stylus) { %>
     gulp.task('styles', function () {
     return gulp.src(paths.styles)
-      .pipe(gulp.dest('app/css'))
       .pipe(connect.reload());
     });
   <% } %>
-
   <% if (SASS || Scss) { %>
     gulp.task('styles', function () {<% if (Scss) { %>
     return gulp.src(paths.scss)<% } %><% if (SASS) { %>
@@ -69,7 +66,6 @@
       .pipe(connect.reload());
     });
   <% } %>
-
   <% if (Less) { %>
     gulp.task('styles', function () {
     return gulp.src(paths.less)
@@ -81,7 +77,6 @@
       .pipe(connect.reload());
   });
 <% } %>
-
 <% if (Stylus) { %>
     gulp.task('styles', function () {
     return gulp.src(paths.stylus)
@@ -158,8 +153,12 @@
 
   // Obseravator =============== //
   gulp.task('watch', function() {
-    gulp.watch(paths.html, ['html']);
-    gulp.watch(paths.styles, ['styles']);
+    gulp.watch(paths.html, ['html']);<% if (Scss) { %>
+    gulp.watch(paths.scss, ['styles']);<% } %><% if (SASS) { %>
+    gulp.watch(paths.sass, ['styles']);<% } %><% if (Stylus) { %>
+    gulp.watch(paths.stylus, ['styles']);<% } %><% if (Less) { %>
+    gulp.watch(paths.less, ['styles']);<% } %><% if ( !SASS && !Less && !Scss && !Stylus ) { %>
+    gulp.watch(paths.styles, ['styles']);<% } %>
   });
 
   // Run tasks =============== //
